@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WallFly - Contact</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#0f0f0f,#1a1a1a);
+    color:white;
+}
+
+.container{
+    width:90%;
+    max-width:500px;
+    background:rgba(255,255,255,0.05);
+    padding:25px;
+    border-radius:20px;
+    backdrop-filter: blur(12px);
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    font-size:28px;
+    background: linear-gradient(90deg,#00ffe1,#7c4dff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+input, textarea{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    background:rgba(255,255,255,0.08);
+    color:white;
+}
+
+textarea{
+    min-height:120px;
+    resize:none;
+}
+
+button{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    background:linear-gradient(90deg,#00ffe1,#7c4dff);
+    color:black;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+#status{
+    text-align:center;
+    margin-top:10px;
+    font-size:14px;
+    opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Contact WallFly</h1>
+
+    <input type="text" id="name" placeholder="Ton nom">
+    <input type="email" id="email" placeholder="Ton email">
+    <textarea id="message" placeholder="Ton message..."></textarea>
+
+    <button onclick="sendMessage()">Envoyer 🚀</button>
+
+    <div id="status"></div>
+</div>
+
+<script>
+async function sendMessage(){
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+    const status = document.getElementById("status");
+
+    if(!name || !email || !message){
+        status.innerText = "❌ Remplis tous les champs";
+        return;
+    }
+
+    const webhookURL = "https://discord.com/api/webhooks/1507740626706501692/DpZg-Zt3CgIGaMJoY3js0CiwiYFSklD5sFT8_jskLSGoePVBl94zp9NmPFJe_iPlmcuy";
+
+    const payload = {
+        content: "📩 Nouveau message WallFly",
+        embeds: [{
+            title: "Message contact",
+            color: 7506394,
+            fields: [
+                { name: "Nom", value: name },
+                { name: "Email", value: email },
+                { name: "Message", value: message }
+            ]
+        }]
+    };
+
+    try{
+        await fetch(webhookURL, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(payload)
+        });
+
+        status.innerText = "✅ Message envoyé avec succès !";
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("message").value = "";
+
+    } catch(e){
+        status.innerText = "❌ Erreur lors de l'envoi";
+    }
+}
+</script>
+
+</body>
+</html>
