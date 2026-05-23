@@ -196,12 +196,13 @@ function addWallpaper(){
         }]
     };
 
-    fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    })
-    .then(() => alert("✅ Wallpaper envoyé à WallaFly !"))
-    .catch(() => alert("❌ Erreur d’envoi"));
-}
+    fetch("/api/upload", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+})
+.then(() => alert("✅ Wallpaper envoyé à WallaFly !"))
+.catch(() => alert("❌ Erreur d’envoi"));
 </script>
