@@ -1,0 +1,744 @@
+<!-- WALLPAPER UPLOAD SECTION -->
+
+<section class="wallpaper-upload">
+
+    <div class="upload-box">
+
+        <h1> Ajouter un fond d’écran</h1>
+
+        <p>
+            Envoie ton wallpaper à la galerie WallaFly 🚀
+        </p>
+<!-- WALLAFLY WALLPAPER UPLOAD -->
+
+<section class="wallpaper-upload">
+
+    <div class="upload-box">
+
+        <h1>🖼️ Upload un Wallpaper</h1>
+
+        <p>
+            Ajoute ton fond d’écran à la galerie WallaFly 🚀
+        </p>
+
+        <!-- INFOS -->
+
+        <div class="inputs">
+
+            <div class="inputBox">
+                <label>📸 Nom du wallpaper</label>
+                <input type="text" id="wallpaperName" placeholder="Ex: Neon City">
+            </div>
+
+            <div class="inputBox">
+                <label>👤 Pseudo de l’auteur</label>
+                <input type="text" id="authorName" placeholder="Ex: NohamDev">
+            </div>
+
+            <div class="inputBox">
+                <label>✉️ Email de l’auteur</label>
+                <input type="email" id="authorEmail" placeholder="Ex: noham@email.com">
+            </div>
+
+        </div>
+
+        <!-- UPLOAD -->
+
+        <label for="wallpaperInput" class="upload-area">
+
+            <div class="icon">📤</div>
+
+            <h2>Ajoute ton image</h2>
+
+            <span>
+                Clique ici ou glisse ton wallpaper
+            </span>
+
+            <input type="file" id="wallpaperInput" accept="image/*">
+
+        </label>
+
+        <!-- PREVIEW -->
+
+        <div class="preview-container" id="previewContainer">
+
+            <img id="previewImage">
+
+        </div>
+
+        <!-- BUTTON -->
+
+        <button onclick="addWallpaper()">
+            ⚡ Publier dans la galerie
+        </button>
+
+    </div>
+
+</section>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,sans-serif;
+}
+
+.wallpaper-upload{
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:50px;
+
+    background:
+    radial-gradient(circle at top left,#8a2eff33,transparent 30%),
+    radial-gradient(circle at bottom right,#00d9ff33,transparent 30%),
+    #080b14;
+}
+
+.upload-box{
+
+    width:100%;
+    max-width:750px;
+
+    padding:50px;
+
+    border-radius:35px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+    0 0 50px rgba(0,0,0,0.5);
+
+    text-align:center;
+}
+
+/* TITLE */
+
+.upload-box h1{
+
+    font-size:46px;
+
+    margin-bottom:15px;
+
+    background:
+    linear-gradient(90deg,#00d9ff,#8a2eff,#ff3cac);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.upload-box p{
+
+    color:#cfcfcf;
+
+    margin-bottom:40px;
+
+    font-size:16px;
+}
+
+/* INPUTS */
+
+.inputs{
+
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+
+    margin-bottom:35px;
+}
+
+.inputBox{
+
+    text-align:left;
+}
+
+.inputBox label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    color:white;
+
+    font-size:14px;
+}
+
+.inputBox input{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+    outline:none;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    color:white;
+
+    transition:0.35s;
+}
+
+.inputBox input:focus{
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 20px rgba(0,217,255,0.2);
+}
+
+/* UPLOAD AREA */
+/* INFOS */
+
+.wallpaper-infos{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:20px;
+
+    margin-bottom:35px;
+}
+
+.inputBox{
+
+    text-align:left;
+}
+
+.inputBox label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:600;
+}
+
+.inputBox input{
+
+    width:100%;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    border:none;
+    outline:none;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    color:white;
+
+    font-size:15px;
+
+    transition:0.35s;
+}
+
+.inputBox input:focus{
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 20px rgba(0,217,255,0.2);
+}
+.upload-area{
+
+    width:100%;
+
+    min-height:280px;
+
+    border-radius:30px;
+
+    border:2px dashed rgba(255,255,255,0.15);
+
+    background:rgba(255,255,255,0.03);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:0.35s;
+
+    overflow:hidden;
+}
+
+.upload-area:hover{
+
+    transform:scale(1.02);
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 25px rgba(0,217,255,0.15),
+    0 0 25px rgba(138,46,255,0.12);
+}
+
+.upload-area input{
+    display:none;
+}
+
+.icon{
+
+    font-size:70px;
+
+    margin-bottom:20px;
+}
+
+.upload-area h2{
+
+    color:white;
+
+    margin-bottom:10px;
+
+    font-size:28px;
+}
+
+.upload-area span{
+    color:#bdbdbd;
+}
+
+/* PREVIEW */
+
+.preview-container{
+
+    margin-top:35px;
+
+    display:none;
+
+    justify-content:center;
+}
+
+.preview-container img{
+
+    width:100%;
+
+    max-height:350px;
+
+    object-fit:cover;
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+/* BUTTON */
+
+button{
+
+    width:100%;
+
+    margin-top:35px;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:22px;
+
+    font-size:17px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+    linear-gradient(90deg,#00d9ff,#8a2eff,#ff3cac);
+
+    background-size:300%;
+
+    animation:rgb 5s linear infinite;
+
+    transition:0.35s;
+}
+
+button:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 0 30px rgba(0,217,255,0.3),
+    0 0 30px rgba(138,46,255,0.3);
+}
+
+@keyframes rgb{
+
+    0%{
+        background-position:0%;
+    }
+
+    100%{
+        background-position:300%;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.upload-box{
+    padding:30px;
+}
+
+.upload-box h1{
+    font-size:34px;
+}
+
+.upload-area h2{
+    font-size:22px;
+}
+
+}
+
+</style>
+
+<script>
+
+const wallpaperInput = document.getElementById("wallpaperInput");
+
+const previewContainer = document.getElementById("previewContainer");
+
+const previewImage = document.getElementById("previewImage");
+
+/* IMAGE PREVIEW */
+
+wallpaperInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(file){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            previewImage.src = e.target.result;
+
+            previewContainer.style.display = "flex";
+        }
+
+        reader.readAsDataURL(file);
+    }
+
+});
+
+function addWallpaper(){
+
+    const imageName =
+    document.getElementById("imageName").value;
+
+    const authorPseudo =
+    document.getElementById("authorPseudo").value;
+
+    const authorEmail =
+    document.getElementById("authorEmail").value;
+
+    if(
+        imageName === "" ||
+        authorPseudo === "" ||
+        authorEmail === "" ||
+        !previewImage.src
+    ){
+        alert("❌ Remplis tous les champs.");
+        return;
+    }
+
+    // 🔥 WEBHOOK DISCORD
+    const webhookURL = "https://discord.com/api/webhooks/1507740578215891004/kSldgnmZKBw4xiVkpDDfiktxjxvlGwrwUcKDiTzuV5BmmKFClvQwqJ9MMS8eRvCBO-Oo";
+
+    const payload = {
+        content: "🖼️ Nouveau wallpaper reçu !",
+        embeds: [
+            {
+                title: imageName,
+                color: 5814783,
+                fields: [
+                    { name: "👤 Auteur", value: authorPseudo, inline: true },
+                    { name: "✉️ Email", value: authorEmail, inline: true }
+                ],
+                image: {
+                    url: previewImage.src
+                }
+            }
+        ]
+    };
+
+    fetch(webhookURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        alert("✅ Wallpaper envoyé à WallaFly, nous l'ajouterons dans un délai de 48H.");
+    })
+    .catch(() => {
+        alert("❌ Erreur envoi ");
+    });
+
+}
+
+</script>
+        
+
+<style>
+
+.wallpaper-upload{
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:50px;
+
+    background:
+    radial-gradient(circle at top left,#7b2cff33,transparent 30%),
+    radial-gradient(circle at bottom right,#00d9ff33,transparent 30%),
+    #090b14;
+}
+
+.upload-box{
+
+    width:100%;
+    max-width:700px;
+
+    padding:50px;
+
+    border-radius:35px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(20px);
+
+    text-align:center;
+
+    box-shadow:
+    0 0 40px rgba(0,0,0,0.5);
+}
+
+.upload-box h1{
+
+    font-size:42px;
+
+    margin-bottom:15px;
+
+    background:linear-gradient(90deg,#00d9ff,#8a2eff,#ff3cac);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.upload-box p{
+    color:#cfcfcf;
+    margin-bottom:40px;
+}
+
+/* AREA */
+
+.upload-area{
+
+    width:100%;
+
+    min-height:300px;
+
+    border-radius:30px;
+
+    border:2px dashed rgba(255,255,255,0.15);
+
+    background:rgba(255,255,255,0.03);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:0.35s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.upload-area:hover{
+
+    transform:scale(1.02);
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 30px rgba(0,217,255,0.15),
+    0 0 30px rgba(138,46,255,0.12);
+}
+
+.upload-area input{
+    display:none;
+}
+
+.icon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+.upload-area h2{
+    font-size:28px;
+    margin-bottom:10px;
+    color:white;
+}
+
+.upload-area span{
+    color:#bdbdbd;
+}
+
+/* PREVIEW */
+
+.preview-container{
+
+    margin-top:35px;
+
+    width:100%;
+
+    display:none;
+
+    justify-content:center;
+}
+
+.preview-container img{
+
+    width:100%;
+    max-height:350px;
+
+    object-fit:cover;
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 0 30px rgba(0,0,0,0.4);
+}
+
+/* BUTTON */
+
+button{
+
+    margin-top:35px;
+
+    width:100%;
+
+    padding:20px;
+
+    border:none;
+
+    border-radius:22px;
+
+    font-size:17px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+    linear-gradient(90deg,#00d9ff,#8a2eff,#ff3cac);
+
+    background-size:300%;
+
+    animation:rgb 5s linear infinite;
+
+    transition:0.35s;
+}
+
+button:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 0 30px rgba(0,217,255,0.3),
+    0 0 35px rgba(138,46,255,0.3);
+}
+
+@keyframes rgb{
+
+    0%{
+        background-position:0%;
+    }
+
+    100%{
+        background-position:300%;
+    }
+}
+
+</style>
+
+<script>
+
+const wallpaperInput = document.getElementById("wallpaperInput");
+const previewContainer = document.getElementById("previewContainer");
+const previewImage = document.getElementById("previewImage");
+
+wallpaperInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(file){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            previewImage.src = e.target.result;
+
+            previewContainer.style.display = "flex";
+        }
+
+        reader.readAsDataURL(file);
+    }
+
+});
+
+function addWallpaper(){
+
+    if(previewImage.src){
+
+        alert("✅ Fond d’écran ajouté à la galerie WallaFly !");
+    }
+
+    else{
+
+        alert("❌ Sélectionne une image.");
+    }
+
+}
+
+</script>
