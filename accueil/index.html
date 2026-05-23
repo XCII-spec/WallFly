@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WallSpace</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#2563eb33,transparent 25%),
+    radial-gradient(circle at bottom right,#7c3aed33,transparent 25%),
+    #050816;
+    overflow-x:hidden;
+    color:white;
+}
+
+/* GRID FX */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:radial-gradient(white 1px,transparent 1px);
+    background-size:40px 40px;
+    opacity:0.06;
+    animation:moveBg 25s linear infinite;
+    z-index:0;
+}
+
+@keyframes moveBg{
+    from{transform:translateY(0);}
+    to{transform:translateY(-40px);}
+}
+
+/* LOADER */
+#loader{
+    position:fixed;
+    inset:0;
+    background:#050816;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.loader-box{
+    text-align:center;
+}
+
+.loader-logo{
+    font-size:40px;
+    font-weight:800;
+    background:linear-gradient(90deg,#38bdf8,#8b5cf6,#ec4899);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:25px;
+}
+
+.spinner{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:4px solid rgba(255,255,255,0.1);
+    border-top:4px solid #38bdf8;
+    animation:spin 1s linear infinite;
+    margin:auto;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+
+/* HEADER */
+header{
+    width:100%;
+    padding:25px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(20px);
+    background:rgba(0,0,0,0.25);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+    font-size:30px;
+    font-weight:700;
+    background:linear-gradient(90deg,#38bdf8,#8b5cf6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+nav{
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    color:#dbeafe;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#38bdf8;
+}
+
+/* HERO */
+.hero{
+    padding:140px 8% 40px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+.hero h1{
+    font-size:65px;
+    line-height:1.1;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#38bdf8,#8b5cf6,#ec4899);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    margin-top:20px;
+    color:#cbd5e1;
+    font-size:18px;
+}
+
+/* GALLERY */
+.gallery{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:20px;
+}
+
+/* CARD PREMIUM */
+.card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.4s;
+    position:relative;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:
+    0 25px 60px rgba(0,0,0,0.5),
+    0 0 25px rgba(56,189,248,0.2);
+}
+
+.card img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:15px;
+    text-align:center;
+}
+
+/* BUTTONS */
+.download, .view-btn{
+    display:block;
+    margin-top:10px;
+    padding:10px;
+    border-radius:12px;
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.download{
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+}
+
+.view-btn{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.download:hover,
+.view-btn:hover{
+    transform:scale(1.05);
+}
+
+/* VIEW PAGE MODAL */
+#modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-box{
+    width:90%;
+    max-width:900px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:25px;
+    padding:25px;
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:20px;
+}
+
+.modal-box img{
+    width:100%;
+    border-radius:20px;
+}
+
+.info h2{
+    margin-bottom:15px;
+}
+
+.info p{
+    color:#cbd5e1;
+    margin-bottom:10px;
+}
+
+.close{
+    position:absolute;
+    top:20px;
+    right:20px;
+    cursor:pointer;
+    font-size:30px;
+}
+
+/* BUTTON DOWNLOAD MODAL */
+.modal-btn{
+    margin-top:20px;
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    font-weight:700;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(90deg,#38bdf8,#8b5cf6,#ec4899);
+}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+    .hero h1{font-size:45px;}
+    .modal-box{grid-template-columns:1fr;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+    <div class="loader-box">
+        <div class="loader-logo">WallSpace</div>
+        <div class="spinner"></div>
+    </div>
+</div>
+
+<header>
+    <div class="logo">WallSpace</div>
+    <nav>
+        <a href="#">Accueil</a>
+        <a href="#">Upload</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Des <span class="gradient">wallpapers</span> incroyables</h1>
+    <p>Collection premium HD gratuite</p>
+
+    <div class="gallery">
+
+        <div class="card">
+            <img src="wallapers/1.jpg">
+            <div class="card-content">
+                <p>Miami</p>
+                <a class="download" href="wallapers/1.jpg" download>Télécharger</a>
+                <button class="view-btn" onclick="openModal('wallapers/1.jpg','Miami','NohamDev','noham@mail.com')">Voir plus</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="wallapers/2.jpg">
+            <div class="card-content">
+                <p>Cyber Space</p>
+                <a class="download" href="wallapers/2.jpg" download>Télécharger</a>
+                <button class="view-btn" onclick="openModal('wallapers/2.jpg','Cyber Space','NohamDev','unknow')">Voir plus</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal">
+    <div class="modal-box">
+
+        <span class="close" onclick="closeModal()">✖</span>
+
+        <div>
+            <img id="modalImg">
+        </div>
+
+        <div class="info">
+            <h2 id="modalName"></h2>
+            <p id="modalAuthor"></p>
+            <p id="modalEmail"></p>
+
+            <button class="modal-btn" onclick="downloadImg()">
+                ⬇️ Télécharger
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+/* LOADER */
+window.addEventListener("load", () => {
+    document.getElementById("loader").style.display = "none";
+});
+
+/* MODAL DATA */
+let currentImg = "";
+
+function openModal(img, name, author, email){
+
+    currentImg = img;
+
+    document.getElementById("modalImg").src = img;
+    document.getElementById("modalName").innerText = name;
+    document.getElementById("modalAuthor").innerText = "👤 " + author;
+    document.getElementById("modalEmail").innerText = "✉️ " + email;
+
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display = "none";
+}
+
+function downloadImg(){
+    const a = document.createElement("a");
+    a.href = currentImg;
+    a.download = "wallpaper.jpg";
+    a.click();
+}
+
+</script>
+
+</body>
+</html>
